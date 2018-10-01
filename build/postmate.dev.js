@@ -323,11 +323,13 @@
           _ref$container = _ref.container,
           container = _ref$container === void 0 ? typeof container !== 'undefined' ? container : document.body : _ref$container,
           model = _ref.model,
-          url = _ref.url;
+          url = _ref.url,
+          allow = _ref.allow;
 
       // eslint-disable-line no-undef
       this.parent = window;
       this.frame = document.createElement('iframe');
+      this.frame.allow = allow;
       container.appendChild(this.frame);
       this.child = this.frame.contentWindow || this.frame.contentDocument.parentWindow;
       this.model = model || {};
@@ -519,7 +521,7 @@
               type: messageType
             };
 
-            if (ports) {
+            if (ports && ports.length > 0) {
               var port = ports[0];
               port.postMessage(reply);
               _this5.source = port;
